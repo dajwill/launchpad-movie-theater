@@ -1,0 +1,18 @@
+%p#notice= notice
+%h1 Listing Tickets
+%table
+  %thead
+    %tr
+      %th Movie
+      %th Theater
+      %th{:colspan => "3"}
+  %tbody
+    - @tickets.each do |ticket|
+      %tr
+        %td= ticket.movie_id
+        %td= ticket.theater_id
+        %td= link_to 'Show', ticket
+        %td= link_to 'Edit', edit_ticket_path(ticket)
+        %td= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Ticket', new_ticket_path
