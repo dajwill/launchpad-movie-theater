@@ -1,4 +1,11 @@
-= select_tag :movie, options_for_select(@movies_now_playing.map{|movie| [movie['title'], { 'data-id' => movie }]}) 
+.ui.fluid.search.selection.dropdown
+  %input{name: 'movie', type: 'hidden'}
+  %i.dropdown.icon
+  .default.text Select a movie
+  .menu
+    - @movies_now_playing.each do |movie|
+      .item{:'data-value' => movie['title']}= movie['title']
+= select_tag :movie, options_for_select(@movies_now_playing.map{|movie| [movie['title'], { 'data-id' => movie }]}), name: 'movie', type: 'hidden'
 = @movies_now_playing
 -# = form_for(@movie) do |f|
 -#   - if @movie.errors.any?
