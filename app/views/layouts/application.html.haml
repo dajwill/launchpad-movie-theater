@@ -7,4 +7,15 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = yield
+    .ui.menu
+      .header.item LaunchPad Movie Theater
+      .item= link_to 'Edit Theater', theaters_path
+      .item= link_to 'Edit Movies', movies_path
+      .right.menu
+        .item
+          .ui.action.left.icon.input
+            %i.search.icon
+            %input{:placeholder => "Search", :type => "text"}
+              %button.ui.button Submit
+    .ui.container
+      = yield

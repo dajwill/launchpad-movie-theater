@@ -11,7 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require cocoon
 //= require semantic-ui
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
+
+$('.ui.dropdown')
+  .dropdown()
+;

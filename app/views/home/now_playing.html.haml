@@ -1,0 +1,19 @@
+%h1 Now Playing
+.ui.divided.items
+  -@movie_theaters.each do |movie_theater|
+    .movie.item
+      .image
+        %img{:src => "#{movie_theater.movie.image_url}", class: 'movie-image'}
+      .content
+        .header= movie_theater.movie.title
+        .extra
+          = simple_form_for @ticket do |f|
+            = f.input :movie_id, input_html: {value: movie_theater.movie.id}, as: :hidden
+            = f.input :theater_id, input_html: {value: movie_theater.id}, as: :hidden
+            = f.submit 'Buy tickets', class: 'ui right floated button'
+          - if movie_theater.showings.present?
+            .showtimes
+              -movie_theater.showings.uniq{|s| s.time}.each do |showing|
+                .ui.inverted.green.button= showing.time.strftime("%-l:%M %p")
+          %br
+          .ui.label= "#{movie_theater.capacity} seats left"

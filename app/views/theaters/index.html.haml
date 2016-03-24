@@ -1,14 +1,20 @@
 %p#notice= notice
 %h1 Listing Theaters
-%table
+%table.ui.single.line.table
   %thead
     %tr
+      %th Theater
       %th Capacity
+      %th Now Playing
       %th{:colspan => "3"}
   %tbody
-    - @theaters.each do |theater|
+    - @theaters.each_with_index do |theater, index|
       %tr
+        %td= "Theater ##{index}"
         %td= theater.capacity
+        %td
+          - if theater.movie.present?
+            = theater.movie.title
         %td= link_to 'Show', theater
         %td= link_to 'Edit', edit_theater_path(theater)
         %td= link_to 'Destroy', theater, method: :delete, data: { confirm: 'Are you sure?' }

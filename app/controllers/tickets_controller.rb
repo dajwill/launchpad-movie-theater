@@ -28,7 +28,7 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
+        format.html { redirect_to edit_ticket_path(@ticket), notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
         format.html { render :new }
@@ -69,6 +69,6 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:movie_id, :theater_id)
+      params.require(:ticket).permit(:movie_id, :theater_id, :first_name, :last_name, :card_type, :card_number, :cvc, :expiration_date)
     end
 end

@@ -11,12 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323185457) do
+ActiveRecord::Schema.define(version: 20160324213924) do
+
+  create_table "movie_theaters", force: :cascade do |t|
+    t.integer  "movie_id"
+    t.integer  "theater_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
     t.string   "rating"
     t.integer  "run_time"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "image_url"
+    t.string   "description"
+  end
+
+  create_table "showings", force: :cascade do |t|
+    t.string   "theater_id"
+    t.time     "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -25,13 +41,20 @@ ActiveRecord::Schema.define(version: 20160323185457) do
     t.integer  "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "movie_id"
   end
 
   create_table "tickets", force: :cascade do |t|
     t.integer  "movie_id"
     t.integer  "theater_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "card_type"
+    t.integer  "card_number"
+    t.date     "expiration_date"
+    t.integer  "cvc"
   end
 
 end

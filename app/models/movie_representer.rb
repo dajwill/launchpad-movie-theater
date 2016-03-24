@@ -22,7 +22,7 @@ class MovieRepresenter
       movies << {
         "title" => movie['title'],
         "overview" => movie['overview'],
-        "image" => "https://image.tmdb.org/t/p/original/#{movie['poster_path']}",
+        "image" => "https://image.tmdb.org/t/p/original/#{movie['backdrop_path']}",
       }
     end
     movies

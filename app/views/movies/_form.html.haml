@@ -1,32 +1,34 @@
-.ui.fluid.search.selection.dropdown
-  %input{name: 'movie', type: 'hidden'}
-  %i.dropdown.icon
-  .default.text Select a movie
-  .menu
-    - @movies_now_playing.each do |movie|
-      .item{:'data-value' => movie['title']}= movie['title']
-= select_tag :movie, options_for_select(@movies_now_playing.map{|movie| [movie['title'], { 'data-id' => movie }]}), name: 'movie', type: 'hidden'
-= @movies_now_playing
--# = form_for(@movie) do |f|
--#   - if @movie.errors.any?
--#     #error_explanation
--#       %h2
--#         = pluralize(@movie.errors.count, "error")
--#         prohibited this movie from being saved:
--#       %ul
--#         - @movie.errors.full_messages.each do |message|
--#           %li= message
--#   .field
--#     = f.label :title
--#     %br/
--#     = f.text_field :title
--#   .field
--#     = f.label :rating
--#     %br/
--#     = f.text_field :rating
--#   .field
--#     = f.label :run_time
--#     %br/
--#     = f.number_field :run_time
--#   .actions
--#     = f.submit
+.ui.container
+  .ui.fluid.search.selection.dropdown
+    %input{name: 'movie', type: 'hidden', id: 'movie-select'}
+    %i.dropdown.icon
+    .default.text Select a movie
+    .menu
+      - @movies_now_playing.each do |movie|
+        .movie.item{:'data' => movie}= movie['title']
+  -# .actions
+  -#   .ui.primary.button Save
+
+  = form_for @movie, class: 'movie-form' do |f|
+    - if @movie.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@movie.errors.count, "error")
+          prohibited this movie from being saved:
+        %ul
+          - @movie.errors.full_messages.each do |message|
+            %li= message
+    .field
+      = f.label :title
+      %br/
+      = f.text_field :title
+    .field
+      = f.label :image_url
+      %br/
+      = f.text_field :image_url
+    -# .field
+    -#   = f.label :run_time
+    -#   %br/
+    -#   = f.number_field :run_time
+    .actions
+      = f.submit 'Add Movie', class: 'ui primary button'

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'home#now_playing'
   resources :tickets
   resources :tickets
   resources :theaters

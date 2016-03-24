@@ -1,15 +1,29 @@
-= form_for(@theater) do |f|
-  - if @theater.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@theater.errors.count, "error")
-        prohibited this theater from being saved:
-      %ul
-        - @theater.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = f.label :capacity
-    %br/
-    = f.number_field :capacity
-  .actions
-    = f.submit
+-# = form_for(@theater) do |f|
+-#   - if @theater.errors.any?
+-#     #error_explanation
+-#       %h2
+-#         = pluralize(@theater.errors.count, "error")
+-#         prohibited this theater from being saved:
+-#       %ul
+-#         - @theater.errors.full_messages.each do |message|
+-#           %li= message
+-#   .field
+-#     = f.label :capacity
+-#     %br/
+-#     = f.number_field :capacity
+-#     %br
+-#     = f.label :movie_id
+-#     %br/
+-#     = f.select :movie_id, options_from_collection_for_select(Movie.all, "id", "title")
+-#   .actions
+-#     = f.submit
+= simple_form_for(@theater) do |f|
+  = f.input :capacity, required: true
+  = f.simple_fields_for :movie_theater do |mt|
+    = mt.input :movie_id, as: :select, collection: Movie.all, label_method: :title, value_method: :id
+  #showings
+    = f.simple_fields_for :showings do |showing|
+      = render 'showing_fields', f: showing
+    .links
+      = link_to_add_association 'add showing', f, :showings, class: 'ui button'
+  = f.submit "Create Theater", class: 'ui primary button'
