@@ -29,7 +29,6 @@ gem 'httparty'
 gem 'simple_form'
 # gem 'pickadate-rails'
 gem "cocoon"
-gem 'mailcatcher', '~> 0.6.1'
 gem 'pg'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -42,6 +41,7 @@ gem 'pg'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'mailcatcher', '~> 0.6.1'
   gem 'byebug'
 end
 
@@ -52,8 +52,4 @@ group :development do
   gem "better_errors"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-end
-
-group :production do
-  gem 'pg'
 end
