@@ -1,4 +1,4 @@
-class Mailer < ApplicationMailer
+class TicketMailer < ActionMailer::Base
   include ActionView::Helpers::AssetUrlHelper
   default from: 'noreply@theater.com'
 
