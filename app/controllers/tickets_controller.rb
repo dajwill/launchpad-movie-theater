@@ -25,13 +25,14 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @ticket = Ticket.new(ticket_params)
-
+    # raise
     respond_to do |format|
       if @ticket.save
         format.html { redirect_to edit_ticket_path(@ticket), notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
-        format.html { render :new }
+        # raise
+        format.html { redirect_to root_path, notice: @ticket.errors.messages[:showing_id] }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end
@@ -42,6 +43,7 @@ class TicketsController < ApplicationController
   def update
     respond_to do |format|
       if @ticket.update(ticket_params)
+        TicketMailer.ticket_confirmation(@ticket)
         format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @ticket }
       else
@@ -69,6 +71,6 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:movie_id, :theater_id, :first_name, :last_name, :card_type, :card_number, :cvc, :expiration_date)
+      params.require(:ticket).permit(:movie_id, :showing_id, :first_name, :last_name, :card_type, :card_number, :cvc, :expiration_date)
     end
 end

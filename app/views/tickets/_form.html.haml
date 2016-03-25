@@ -1,6 +1,16 @@
+.ui.modal
+  .header Header
+  .content
+    %p
+  .actions
+    .ui.approve.button Approve
+    .ui.button Neutral
+    .ui.cancel.button Cancel
+
 = simple_form_for @ticket do |f|
   = f.input :first_name
   = f.input :last_name
+  = f.input :email
   -# = f.input :card_type
   .ui.selection.dropdown
     = f.input :card_type, as: :hidden
@@ -19,6 +29,8 @@
   = f.input :card_number
   = f.input :cvc, label: 'CVC'
   = f.input :expiration_date
+  .actions
+    = f.submit
 
 -# = form_for(@ticket) do |f|
 -#   - if @ticket.errors.any?
@@ -39,3 +51,8 @@
 -#     = f.number_field :theater_id
 -#   .actions
 -#     = f.submit
+
+:coffeescript
+  $ ->
+    window.onbeforeunload = ->
+      return false

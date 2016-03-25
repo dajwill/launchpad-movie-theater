@@ -20,4 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      tickets:
+        showing_id: "Showing"
+    errors:
+      models:
+        tickets:
+          attributes:
+            showing_id:
+              blank: "must be selected"

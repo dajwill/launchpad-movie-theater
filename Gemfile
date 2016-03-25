@@ -29,6 +29,8 @@ gem 'httparty'
 gem 'simple_form'
 # gem 'pickadate-rails'
 gem "cocoon"
+gem 'mailcatcher', '~> 0.6.1'
+# gem 'pg', '~> 0.18.4'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
