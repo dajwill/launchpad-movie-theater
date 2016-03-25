@@ -14,8 +14,9 @@
       .right.menu
         .item
           .ui.action.left.icon.input
-            %i.search.icon
-            %input{:placeholder => "Search", :type => "text"}
+            -# %i.search.icon
+            = form_tag root_path, method: :get, remote: true do
+              =text_field_tag :title, nil, placeholder: 'Search'
               %button.ui.button Submit
     .ui.container
       = yield

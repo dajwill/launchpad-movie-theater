@@ -8,6 +8,8 @@
     .ui.cancel.button Cancel
 
 = simple_form_for @ticket do |f|
+  = f.input :movie_id
+  = f.input :showing_id, as: :hidden
   = f.input :first_name
   = f.input :last_name
   = f.input :email

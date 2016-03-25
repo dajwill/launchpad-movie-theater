@@ -1,0 +1,5 @@
+console.log('new search')
+-# ajaxBack()
+$("#movies").html("#{raw j render(partial: 'movies')}")
+history.pushState({tag: true}, '', "#{url_for(params)}")
+-# hideLoader()

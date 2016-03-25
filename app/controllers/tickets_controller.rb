@@ -28,7 +28,8 @@ class TicketsController < ApplicationController
     # raise
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to edit_ticket_path(@ticket), notice: 'Ticket was successfully created.' }
+        TicketMailer.ticket_confirmation(@ticket)
+        format.html { redirect_to root_path, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
         # raise

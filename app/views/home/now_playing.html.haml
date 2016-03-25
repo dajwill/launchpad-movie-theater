@@ -4,25 +4,5 @@
       = flash[:notice].first
     %i.close.icon
 %h1 Now Playing
-.ui.divided.items
-  -@movie_theaters.each do |movie_theater|
-    .movie.item
-      .image
-        %img{:src => "#{movie_theater.movie.image_url}", class: 'movie-image'}
-      .content
-        .header= movie_theater.movie.title
-        .extra
-          = simple_form_for @ticket, html: {id: "theater-#{movie_theater.id}"} do |f|
-            = f.input :movie_id, input_html: {value: movie_theater.movie.id}, as: :hidden
-            = f.input :showing_id, as: :hidden
-            = f.submit 'Buy tickets', class: 'ui right floated button'
-          - if movie_theater.showings.present?
-            .showtimes
-              -movie_theater.showings.uniq{|s| s.time}.each do |showing|
-                - if showing.sold_out?
-                  .ui.inverted.red.button{:"data-id" => showing.id, :"data-input" => "theater-#{movie_theater.id}" }
-                    %span= showing.time.strftime("%-l:%M %p")
-                -else
-                  .ui.inverted.green.button{:"data-id" => showing.id, :"data-input" => "theater-#{movie_theater.id}", :'data-seats' => "#{showing.remaining_seats} seats" }= showing.time.strftime("%-l:%M %p")
-          %br
-          .ui.label= "#{movie_theater.capacity} seats left"
+#movies
+  = render 'movies'
