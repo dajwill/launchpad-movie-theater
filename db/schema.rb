@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160325062211) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "movie_theaters", force: :cascade do |t|
     t.integer  "movie_id"
     t.integer  "theater_id"
