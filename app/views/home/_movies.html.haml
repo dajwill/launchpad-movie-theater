@@ -1,49 +1,55 @@
-.ui.divided.items
-  -@movie_theaters.each do |movie_theater|
-    .movie.item
-      .image
-        %img{:src => "#{movie_theater.movie.image_url}", class: 'movie-image'}
-      .content
-        .header= movie_theater.movie.title
-        .extra
-          .ui.modal{id: "modal-#{movie_theater.id}"}
-            .header= movie_theater.movie.title
-            .content
-              -# = render 'tickets/form'
-              = simple_form_for @ticket, html: {id: "theater-#{movie_theater.id}"} do |f|
-                .ui.error.mesage
-                = f.input :movie_id, input_html: {value: movie_theater.movie.id}, as: :hidden
-                = f.input :showing_id, as: :hidden
-                = f.input :first_name
-                = f.input :last_name
-                = f.input :email
-                -# = f.input :card_type
-                .ui.selection.dropdown
-                  = f.input :card_type, as: :hidden
-                  .default.text Card Type
-                  %i.dropdown.icon
-                  .menu
-                    .item{"data-value" => "visa"}
-                      %i.visa.icon
-                      Visa
-                    .item{"data-value" => "amex"}
-                      %i.amex.icon
-                      American Express
-                    .item{"data-value" => "discover"}
-                      %i.discover.icon
-                      Discover
-                = f.input :card_number
-                = f.input :cvc, label: 'CVC'
-                = f.input :expiration_date
-                .actions
-                  = f.submit 'Purchase', class: 'ui green button'
-          .ui.right.floated.purchase.button.hidden{id: "#{movie_theater.id}-tickets", :"data-modal" => "modal-#{movie_theater.id}"} Buy Tickets
-          - if movie_theater.showings.present?
-            .showtimes
-              -movie_theater.showings.uniq{|s| s.time}.each do |showing|
-                - if showing.sold_out?
-                  .ui.inverted.red.button{:"data-id" => showing.id, :"data-input" => "theater-#{movie_theater.id}", :"data-button" => "#{movie_theater.id}-tickets"}= showing.time.strftime("%-l:%M %p")
-                -else
-                  .ui.inverted.green.button{:"data-id" => showing.id, :"data-input" => "theater-#{movie_theater.id}", :'data-seats' => "#{showing.remaining_seats} seats", :"data-button" => "#{movie_theater.id}-tickets" }= showing.time.strftime("%-l:%M %p")
-          %br
-          -# .ui.label= "#{movie_theater.capacity} seats left"
+- if @movie_theaters.present?
+  .ui.divided.items
+    -@movie_theaters.each do |movie_theater|
+      .movie.item
+        .image
+          %img{:src => "#{movie_theater.movie.image_url}", class: 'movie-image'}
+        .content
+          .header= movie_theater.movie.title
+          .extra
+            -if movie_theater.movie.description.present?
+              = movie_theater.movie.description
+            .ui.modal{id: "modal-#{movie_theater.id}"}
+              .header= movie_theater.movie.title
+              .content
+                -# = render 'tickets/form'
+                = simple_form_for @ticket, html: {id: "theater-#{movie_theater.id}"} do |f|
+                  .ui.error.mesage
+                  = f.input :movie_id, input_html: {value: movie_theater.movie.id}, as: :hidden
+                  = f.input :showing_id, as: :hidden
+                  = f.input :first_name
+                  = f.input :last_name
+                  = f.input :email
+                  -# = f.input :card_type
+                  .ui.selection.dropdown
+                    = f.input :card_type, as: :hidden
+                    .default.text Card Type
+                    %i.dropdown.icon
+                    .menu
+                      .item{"data-value" => "visa"}
+                        %i.visa.icon
+                        Visa
+                      .item{"data-value" => "amex"}
+                        %i.amex.icon
+                        American Express
+                      .item{"data-value" => "discover"}
+                        %i.discover.icon
+                        Discover
+                  = f.input :card_number
+                  = f.input :cvc, label: 'CVC'
+                  = f.input :expiration_date
+                  .actions
+                    = f.submit 'Purchase', class: 'ui green button'
+            - if movie_theater.showings.present?
+              .showtimes
+                -movie_theater.showings.uniq{|s| s.time}.each do |showing|
+                  - if showing.sold_out?
+                    .ui.inverted.red.button{:"data-id" => showing.id, :"data-input" => "theater-#{movie_theater.id}", :"data-button" => "#{movie_theater.id}-tickets"}= showing.time.strftime("%-l:%M %p")
+                  -else
+                    .ui.inverted.green.button{:"data-id" => showing.id, :"data-input" => "theater-#{movie_theater.id}", :'data-seats' => "#{showing.remaining_seats} seats", :"data-button" => "#{movie_theater.id}-tickets" }= showing.time.strftime("%-l:%M %p")
+            .ui.right.floated.purchase.button.hidden{id: "#{movie_theater.id}-tickets", :"data-modal" => "modal-#{movie_theater.id}"} Buy Tickets
+            %br
+            -# .ui.label= "#{movie_theater.capacity} seats left"
+- else
+  .ui.message
+    No movies playing
