@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def now_playing
     # @movie_theaters = Theater.joins(:movie_theater).uniq.all
-    @movie_theaters = Theater.all.select{|t| t.active?}
+    # @movie_theaters = Theater.all.select{|t| t.active?}
+    @movie_theaters = Theater.all.joins(:movie_theater)
     @ticket = Ticket.new
 
     if params[:title].present?
