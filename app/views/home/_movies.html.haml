@@ -11,6 +11,7 @@
             .content
               -# = render 'tickets/form'
               = simple_form_for @ticket, html: {id: "theater-#{movie_theater.id}"} do |f|
+                .ui.error.mesage
                 = f.input :movie_id, input_html: {value: movie_theater.movie.id}, as: :hidden
                 = f.input :showing_id, as: :hidden
                 = f.input :first_name
