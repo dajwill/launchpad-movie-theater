@@ -26,4 +26,5 @@
       = render 'showing_fields', f: showing
     .links
       = link_to_add_association 'add showing', f, :showings, class: 'ui button'
-  = f.submit "Create Theater", class: 'ui primary button'
+  .actions
+    = f.submit "Create Theater", class: 'ui primary button'

@@ -32,7 +32,7 @@ class TicketsController < ApplicationController
         format.html { redirect_to ticket_path(@ticket.id), notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
-        raise
+        # raise
         puts @ticket.errors
         format.html { redirect_to root_path, notice: 'Order could not be processed'}
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
