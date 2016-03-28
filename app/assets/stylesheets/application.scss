@@ -31,3 +31,9 @@ body {
   text-decoration: none;
   background-color: none !important;
 }
+
+@media(max-width: 732px) {
+  .right.menu {
+    display: none !important;
+  }
+}
