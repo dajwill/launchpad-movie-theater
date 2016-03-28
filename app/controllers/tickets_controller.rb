@@ -28,12 +28,13 @@ class TicketsController < ApplicationController
     # raise
     respond_to do |format|
       if @ticket.save
-        TicketMailer.ticket_confirmation(@ticket)
-        format.html { redirect_to root_path, notice: 'Ticket was successfully created.' }
+        TicketMailer.ticket_confirmation(@ticket).deliver
+        format.html { redirect_to ticket_path(@ticket.id), notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
-        # raise
-        format.html { redirect_to root_path, notice: @ticket.errors.messages[:showing_id] }
+        raise
+        puts @ticket.errors
+        format.html { redirect_to root_path, notice: 'Order could not be processed'}
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end
@@ -72,6 +73,6 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:movie_id, :showing_id, :first_name, :last_name, :card_type, :card_number, :cvc, :expiration_date)
+      params.require(:ticket).permit(:movie_id, :showing_id, :first_name, :last_name, :email, :card_type, :card_number, :cvc, :expiration_date)
     end
 end

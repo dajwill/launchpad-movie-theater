@@ -1,10 +1,11 @@
 %p#notice= notice
 %p
   %strong Movie:
-  = @ticket.movie_id
+  = @ticket.movie.title
 %p
   %strong Theater:
-  = @ticket.theater_id
-= link_to 'Edit', edit_ticket_path(@ticket)
-|
+  = @ticket.showing.theater_id
+%p
+  %strong Email:
+  = @ticket.email
 = link_to 'Back', tickets_path

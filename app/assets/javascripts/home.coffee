@@ -41,12 +41,18 @@ window.activateModal = ->
     data = $(@).data()
     console.log data['modal']
     $("##{data['modal']}").modal('show')
+
+window.closeAlert = ->
+  $('.message .close').click ->
+    $(@).closest('.message').transition 'fade'
+
 $ ->
   activateTime()
   labelSoldOut()
   labelSeats()
   activateModal()
+  closeAlert()
 
-  $('.cookie.nag')
-    .nag('clear')
-  ;
+  $(window).on 'popstate', (e) ->
+    if e.originalEvent.state.tag
+      window.location.replace document.location.href

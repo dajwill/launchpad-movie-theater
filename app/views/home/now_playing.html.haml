@@ -1,8 +1,12 @@
 -if flash[:notice].present?
-  .ui.inline.cookie.nag
-    %span.title
-      = flash[:notice].first
+  .ui.negative.message
     %i.close.icon
+    .header
+      Order could not be processed
 %h1 Now Playing
 #movies
   = render 'movies'
+
+:coffeescript
+  $ ->
+    history.replaceState({ tag: true }, '', "#{url_for(params)}")

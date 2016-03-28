@@ -2,7 +2,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :showing
   belongs_to :movie
 
-  validates_presence_of :movie_id, :email, :first_name, :card_type, :card_number, :cvc
+  validates_presence_of :movie_id, :email, :first_name, :card_number, :cvc
   # validates_presence_of :showing_id
   validates :showing_id, :presence => { :message => "Must select a showing" }
   validate :tickets_available?

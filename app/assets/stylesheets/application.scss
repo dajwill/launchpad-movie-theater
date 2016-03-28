@@ -26,3 +26,8 @@ body {
 .hidden {
   display: none !important;
 }
+
+.item a:hover {
+  text-decoration: none;
+  background-color: none !important;
+}
