@@ -82,6 +82,7 @@ Rails.application.configure do
     :location => '/usr/sbin/sendmail',
     :arguments => '-i -t'
   }
+  config.action_mailer.default_url_options = { :host => 'movie-theater.herokuapp.com' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 end
