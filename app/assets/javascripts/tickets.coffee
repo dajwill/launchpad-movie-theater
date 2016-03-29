@@ -30,12 +30,18 @@ window.validatePurchase = ->
           type: 'creditCard'
           prompt: 'Please enter a valid credit card number'
         }]
-      # cvc:
-      #   identifier: 'ticket_cvc'
-      #   rules: [{
-      #     type: 'exactLength[3]'
-      #     prompt: 'Please enter a valid CVC'
-      #   }]
+      cvc:
+        identifier: 'ticket_cvc'
+        rules: [{
+          type: 'exactLength[3]'
+          prompt: 'Please enter a valid CVC'
+        }]
+      email:
+        identifier: 'ticket_email'
+        rules: [{
+          type: 'email'
+          prompt: 'Please enter a valid email'
+        }]
 $ ->
   validatePurchase()
   $('#ticket_expiration_date_3i').val('')
