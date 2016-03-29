@@ -10,12 +10,13 @@ class TheatersController < ApplicationController
   # GET /theaters/1
   # GET /theaters/1.json
   def show
+
   end
 
   # GET /theaters/new
   def new
     @theater = Theater.new
-    @theater.build_movie_theater
+    @theater.build_movie_theater 
   end
 
   # GET /theaters/1/edit
