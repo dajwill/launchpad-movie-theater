@@ -16,13 +16,14 @@ class TheatersController < ApplicationController
   # GET /theaters/new
   def new
     @theater = Theater.new
-    @theater.build_movie_theater 
+    @theater.build_movie_theater
   end
 
   # GET /theaters/1/edit
   def edit
     @theater = Theater.find(params[:id])
-    @theater.build_movie_theater
+    # raise
+    @theater.build_movie_theater unless @theater.movie.present?
   end
 
   # POST /theaters
@@ -48,7 +49,7 @@ class TheatersController < ApplicationController
     # raise
     respond_to do |format|
       if @theater.update(theater_params)
-        format.html { redirect_to @theater, notice: 'Theater was successfully updated.' }
+        format.html { redirect_to theaters_path, notice: 'Theater was successfully updated.' }
         format.json { render :show, status: :ok, location: @theater }
       else
         format.html { render :edit }
@@ -75,6 +76,6 @@ class TheatersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def theater_params
-      params.require(:theater).permit(:capacity, movie_theater_attributes: [:movie_id], showings_attributes: [:id, :time, :_destroy])
+      params.require(:theater).permit(:capacity, movie_theater_attributes: [:id, :movie_id], showings_attributes: [:id, :time, :_destroy])
     end
 end

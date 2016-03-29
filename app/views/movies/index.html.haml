@@ -27,4 +27,7 @@
           .header= movie.title
           .ui.right.floated.red.button
             = link_to 'Delete', movie_path(movie.id), method: :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure you want to remove this movie from theaters?')) }
+          .extra
+            -if movie.description.present?
+              %p= movie.description
   = link_to 'New Movie', new_movie_path, class: 'ui button'

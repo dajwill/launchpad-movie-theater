@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 window.validatePurchase = ->
-  $('.ui.form.new_ticket').form
+  $('.ui.form').form
     on: 'blur'
     inline: 'true'
     fields:
@@ -19,17 +19,17 @@ window.validatePurchase = ->
           prompt: 'Please select a dropdown value'
         } ]
       checkbox:
-        identifier: 'ticket_email'
+        identifier: 'ticket_expiration_date'
         rules: [ {
           type: 'empty'
-          prompt: 'Please enter a valid email'
+          prompt: 'Please enter an expiration date'
         } ]
-      # card_number:
-      #   identifier: 'ticket_card_number'
-      #   rules: [{
-      #     type: 'creditCard'
-      #     prompt: 'Please enter a valid credit card number'
-      #   }]
+      card_number:
+        identifier: 'ticket_card_number'
+        rules: [{
+          type: 'creditCard'
+          prompt: 'Please enter a valid credit card number'
+        }]
       # cvc:
       #   identifier: 'ticket_cvc'
       #   rules: [{
